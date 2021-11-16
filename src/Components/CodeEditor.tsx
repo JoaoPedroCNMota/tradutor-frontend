@@ -1,20 +1,23 @@
 import React from "react";
+import {sendCodeToApi} from '../Services/translator'
 import { AppBar, Button, Container, Stack } from "@mui/material";
 import { PlayArrow, Stop } from "@material-ui/icons";
 
 import AceEditor from 'react-ace';
 import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/theme-xcode";
-import Code from "../Services/types";
 
 
 const CodeEditor = () => {
 
-    const [code, setCode] = React.useState<Code>();
+    const [code, setCode] = React.useState('');
 
     const sendCode = () =>{
-        console.log(code?.code)
+        console.log(code);
+        sendCodeToApi(code);
     }
+
+
 
     const cancelCode = () =>{
         console.log('caneling code')
@@ -27,7 +30,7 @@ const CodeEditor = () => {
                     mode="java"
                     theme="xcode"
                     width="100%"
-                    onChange={(e) => setCode({...code, code : e})}
+                    onChange={(e) => setCode(e)}
                 />
             </Container>
             
